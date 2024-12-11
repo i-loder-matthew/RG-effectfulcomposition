@@ -77,42 +77,6 @@ prettyPrintSem = prettyPrintSem' 0
             prettyPrintSem' (indent + 2) right
 
 
--- -- Pretty-print semantic trees as a tree-like structure
--- prettyPrintTree :: Sem -> String
--- prettyPrintTree sem = unlines (buildTree sem)
-
--- -- Helper function to recursively build the tree
--- buildTree :: Sem -> [String]
--- buildTree sem = case sem of
---     Lex ty word ->
---         [nodeText ("Lex " ++ show ty ++ " " ++ show word)]
---     Comb ty mode left right ->
---         let
---             leftTree  = buildTree left
---             rightTree = buildTree right
---             combined  = zipTrees leftTree rightTree
---         in
---             nodeText ("Comb " ++ show ty ++ " (" ++ show mode ++ ")") : combined
-
--- -- Format a node's text with spaces for alignment
--- nodeText :: String -> String
--- nodeText txt = " " ++ txt ++ " "
-
--- -- Combine two subtrees into a single tree-like structure
--- zipTrees :: [String] -> [String] -> [String]
--- zipTrees left right =
---     let
---         width = maximum (map length left ++ map length right)
---         leftPadded  = map (padToWidth width) left
---         rightPadded = map (padToWidth width) right
---         connector   = replicate (width `div` 2) ' ' ++ "|" ++ replicate (width `div` 2) ' '
---         merged      = zipWith (\l r -> l ++ " " ++ r) leftPadded rightPadded
---     in connector : merged
-
--- -- Helper to pad strings to a specified width
--- padToWidth :: Int -> String -> String
--- padToWidth n str = str ++ replicate (n - length str) ' '
-
 -- Example usage
 main :: IO ()
 main = do
